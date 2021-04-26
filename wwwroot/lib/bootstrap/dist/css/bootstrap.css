@@ -6507,92 +6507,92 @@ a.close.disabled {
   vertical-align: text-top !important;
 }
 
-.bg-primary {
+.bandeira-primary {
   background-color: #007bff !important;
 }
 
-a.bg-primary:hover, a.bg-primary:focus,
-button.bg-primary:hover,
-button.bg-primary:focus {
+a.bandeira-primary:hover, a.bandeira-primary:focus,
+button.bandeira-primary:hover,
+button.bandeira-primary:focus {
   background-color: #0062cc !important;
 }
 
-.bg-secondary {
+.bandeira-secondary {
   background-color: #6c757d !important;
 }
 
-a.bg-secondary:hover, a.bg-secondary:focus,
-button.bg-secondary:hover,
-button.bg-secondary:focus {
+a.bandeira-secondary:hover, a.bg-secondary:focus,
+button.bandeira-secondary:hover,
+button.bandeira-secondary:focus {
   background-color: #545b62 !important;
 }
 
-.bg-success {
+.bandeira-success {
   background-color: #28a745 !important;
 }
 
-a.bg-success:hover, a.bg-success:focus,
-button.bg-success:hover,
-button.bg-success:focus {
-  background-color: #1e7e34 !important;
+a.bandeira-success:hover, a.bg-success:focus,
+button.bandeira-success:hover,
+button.bandeira-success:focus {
+    background-color: #1e7e34 !important;
 }
 
-.bg-info {
+.bandeira-info {
   background-color: #17a2b8 !important;
 }
 
-a.bg-info:hover, a.bg-info:focus,
-button.bg-info:hover,
-button.bg-info:focus {
-  background-color: #117a8b !important;
+a.bandeira-info:hover, a.bg-info:focus,
+button.bandeira-info:hover,
+button.bandeira-info:focus {
+    background-color: #117a8b !important;
 }
 
-.bg-warning {
+.bandeira-warning {
   background-color: #ffc107 !important;
 }
 
-a.bg-warning:hover, a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
-  background-color: #d39e00 !important;
+a.bandeira-warning:hover, a.bandeira-warning:focus,
+button.bandeira-warning:hover,
+button.bandeira-warning:focus {
+    background-color: #d39e00 !important;
 }
 
-.bg-danger {
+.bandeira-danger {
   background-color: #dc3545 !important;
 }
 
 a.bg-danger:hover, a.bg-danger:focus,
-button.bg-danger:hover,
-button.bg-danger:focus {
-  background-color: #bd2130 !important;
+button.bandeira-bandeira:hover,
+button.bandeira-danger:focus {
+    background-color: #bd2130 !important;
 }
 
-.bg-light {
-  background-color: #f8f9fa !important;
+.bandeira-light {
+    background-color: #f8f9fa !important;
 }
 
-a.bg-light:hover, a.bg-light:focus,
-button.bg-light:hover,
-button.bg-light:focus {
-  background-color: #dae0e5 !important;
+a.bandeira-light:hover, a.bandeira-light:focus,
+button.bandeira-light:hover,
+button.bandeira-light:focus {
+    background-color: #dae0e5 !important;
 }
 
-.bg-dark {
-  background-color: #343a40 !important;
+.bandeira-dark {
+    background-color: #343a40 !important;
 }
 
-a.bg-dark:hover, a.bg-dark:focus,
-button.bg-dark:hover,
-button.bg-dark:focus {
-  background-color: #1d2124 !important;
+a.bandeira-dark:hover, a.bandeira-dark:focus,
+button.bandeira-dark:hover,
+button.bandeira-dark:focus {
+    background-color: #1d2124 !important;
 }
 
-.bg-white {
-  background-color: #fff !important;
+.bandeira-white {
+    background-color: #fff !important;
 }
 
-.bg-transparent {
-  background-color: transparent !important;
+.bandeira-transparent {
+    background-color: transparent !important;
 }
 
 .border {

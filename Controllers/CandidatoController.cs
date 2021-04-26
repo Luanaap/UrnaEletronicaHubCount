@@ -27,10 +27,10 @@ namespace UrnaEletronica.Controllers
                 Vice = data.Vice
             };
 
-            //Cria o modelo de req
+            
             HttpRequestMessage request = new HttpRequestMessage
             {
-                //Converte o objeto para ser enviado
+                //converte objeto json para ser enviado
                 Content = new StringContent(JsonConvert.SerializeObject(nCand), Encoding.UTF8, "application/json"),
                 Method = HttpMethod.Post,
                 RequestUri = new Uri("https://" + this.Request.Host + "/api/candidate")
@@ -69,10 +69,10 @@ namespace UrnaEletronica.Controllers
             var objString = JsonConvert.SerializeObject(nCand);
 
 
-            //Cria o modelo de req
+            //Cria a request
             HttpRequestMessage request = new HttpRequestMessage
             {
-                //Converte o objeto para ser enviado
+                
                 Content = new StringContent(objString, Encoding.UTF8, "application/json"),
                 Method = HttpMethod.Delete,
                 RequestUri = new Uri("https://" + this.Request.Host + "/api/candidate")

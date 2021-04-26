@@ -20,11 +20,11 @@ namespace UrnaEletronica.Controllers
         public static HttpClient client = new HttpClient();
         public static int etapa = 0;
         public static int legenda = 0;
-        //Etapa 1 = escolha do candidato | Etapa 2 =  confirmação da escolha | Etapa 3 = finalização
+        //1 = escolhe o candidato / 2 =  confirma a escolha / 3 = finaliza
 
         public void Reiniciar()
         {
-            //Reinicia variaveis para controle de sessão
+            //reinicia para votar novamente
             legenda = 0; etapa = 0;
         }
         public IActionResult Index()
@@ -34,10 +34,10 @@ namespace UrnaEletronica.Controllers
         }
         public IActionResult BotaoBranco()
         {
-            // Anular o voto funciona em qualquer etapa, e após, joga para a tela de CONFIRMAÇÃO DO VOTO
+            // anula o voto para o branco
 
-            etapa = 1; // Seta que a etapa/tela atual é a de CONFIRMAÇÃO DO VOTO
-            legenda = 000; // Código do sistema utilizado para identificar um voto em branco.
+            etapa = 1; 
+            legenda = 000; // identifica o voto em branco
 
             ViewBag.Legenda = legenda;
             return PartialView("_TelaConfirma");
@@ -49,17 +49,17 @@ namespace UrnaEletronica.Controllers
         }
         public async Task<IActionResult> BotaoConfirma(int data)
         {
-            //Recebe o voto vindo do front atraves do AngularJS
+            //recebe o front 
 
-            if (etapa == 0) //Caso esteja na fase inicial
+            if (etapa == 0) 
             {
-                // Busca o candidato e exibe na tela para confirmação
+                
                 HttpResponseMessage response = await client.GetAsync("https://" + this.Request.Host + "/api/getcand/" + data);
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     var obj = JsonConvert.DeserializeObject<Candidato>(result);
-                    etapa = 1; // Define a proxima etapa, para confirmação do candidato que será exibido e finalizar o voto
+                    etapa = 1; 
                     legenda = obj.Legenda;
 
                     ViewBag.Legenda = obj.Legenda;
@@ -73,18 +73,18 @@ namespace UrnaEletronica.Controllers
                     return PartialView("_Info", "Houve algum erro, tente novamente!");
                 }
             }
-            else if (etapa == 1) // Caso já esteja no segundo passo
+            else if (etapa == 1) 
             {
-                //Confirma o voto no candidato exibido e encaminha pra tela final
+                //Confirma voto e vai para a fase final
                 var nVoto = new VotoViewModel
                 {
                     Candidato = legenda
                 };
 
-                //Cria o modelo de req
+                
                 HttpRequestMessage request = new HttpRequestMessage
                 {
-                    //Converte o objeto para ser enviado
+                    
                     Content = new StringContent(JsonConvert.SerializeObject(nVoto), Encoding.UTF8, "application/json"),
                     Method = HttpMethod.Post,
                     RequestUri = new Uri("https://" + this.Request.Host + "/api/vote")
@@ -95,7 +95,7 @@ namespace UrnaEletronica.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
-                    etapa = 2; // Define a etapa final para conclusão do processo de votação
+                    etapa = 2; 
 
                     ViewBag.Legenda = nVoto.Candidato;
 
@@ -130,7 +130,7 @@ namespace UrnaEletronica.Controllers
         }
         public async Task<IActionResult> ResetarBrancos()
         {
-            // Envia a requisição de reset para a api
+            
             HttpResponseMessage response = await client.GetAsync("https://" + this.Request.Host + "/api/resetwhite/");
             if (response.IsSuccessStatusCode)
             {

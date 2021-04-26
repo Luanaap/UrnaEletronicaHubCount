@@ -19,24 +19,24 @@ namespace UrnaEletronica.Controllers
         private readonly MainContext _context;
         public ApiController(MainContext context) { _context = context; }
 
-        //Obrigatórias
+       // requisitos obrigátorios 
         [HttpPost]
         [Route("api/candidate")]
         public async Task<IActionResult> AdicionarCandidato()
         {
             try
             {
-                //Converte o retorno json para objeto
+                
                 string json = await new StreamReader(Request.Body).ReadToEndAsync();
                 var data = JsonConvert.DeserializeObject<CandidatoViewModel>(json);
 
-                //Verifica se já existe algum registro com a mesma legenda
+                //verifica se existem registros iguais 
                 if (_context.Candidatos.ToList().FindAll(p => p.Legenda == data.Legenda).Count != 0)
                 {
                     return Json("Erro: Já existe um candidato com essa legenda.");
                 }
 
-                //Verifica se estão nos parâmetros corretos
+                
                 if (data.Legenda.ToString() == "0" || data.Legenda.ToString() == "00" || data.Legenda.ToString().Length != 2)
                 {
                     return Json("Erro: Formato incorreto para a legenda.");
@@ -50,7 +50,7 @@ namespace UrnaEletronica.Controllers
                     return Json("Erro: Formato incorreto para o nome do vice.");
                 }
 
-                //Armazena a informação
+                
                 var nCand = new Candidato
                 {
                     Inscricao = DateTime.Now,
@@ -75,11 +75,11 @@ namespace UrnaEletronica.Controllers
         {
             try
             {
-                //Converte o retorno json para objeto
+                
                 string json = await new StreamReader(Request.Body).ReadToEndAsync();
                 var data = JsonConvert.DeserializeObject<CandidatoViewModel>(json);
 
-                //Seleciona e remove o candidato referente a legenda
+                
                 var cand = _context.Candidatos.First(p => p.Legenda == data.Legenda);
                 _context.Candidatos.Remove(cand);
                 _context.SaveChanges();
@@ -98,11 +98,11 @@ namespace UrnaEletronica.Controllers
         {
             try
             {
-                //Converte o retorno json para objeto
+                //Converte o retorno do json 
                 string json = await new StreamReader(Request.Body).ReadToEndAsync();
                 var data = JsonConvert.DeserializeObject<VotoViewModel>(json);
 
-                //Armazena a informação
+                //armazena infos
                 var nVoto = new Voto
                 {
                     Candidato = data.Candidato,
@@ -111,12 +111,12 @@ namespace UrnaEletronica.Controllers
                 _context.Votos.Add(nVoto);
                 _context.SaveChanges();
 
-                //Confere se o voto veio em branco e retorna info ao front
+                
                 if (data.Candidato == 000)
                 {
                     var nCandidato = new Candidato
                     {
-                        Legenda = 000 // Seta com um numero padrão para o sistema identificar votos brancos para a contagem
+                        Legenda = 000 
                     };
                     return Json(nCandidato);
                 }
@@ -139,23 +139,24 @@ namespace UrnaEletronica.Controllers
         {
             try
             {
-                //Cria uma lista para armazenar o resultado que vai ao front
+                //cria uma lista que armazena todos os dados até o front
                 var Resultados = new List<ResultadosViewModel>();
-                var Votos = _context.Votos.ToList(); //e puxa todos os votos para a contagem
+                var Votos = _context.Votos.ToList(); 
 
-                foreach (var item in _context.Candidatos) //Para cada candidato cadastrado
+                foreach (var item in _context.Candidatos) //um para cada candidato
                 {
                     var nResultado = new ResultadosViewModel
                     {
                         Legenda = item.Legenda,
                         Candidato = item.NomeCompleto,
                         Vice = item.Vice,
-                        Votos = Votos.FindAll(p => p.Candidato == item.Legenda).Count //é buscado na lista de votos a quantidade de itens com a sua legenda
+                        Votos = Votos.FindAll(p => p.Candidato == item.Legenda).Count 
+
                     };
                     Resultados.Add(nResultado);
                 }
 
-                //Faz o calculo de votos em branco no total
+                //calcula todos os votos em branco
                 var nResultadoBranco = new ResultadosViewModel
                 {
                     Legenda = 000,
@@ -173,18 +174,18 @@ namespace UrnaEletronica.Controllers
             }
         }
 
-        // Extras
+        // alguns adicionais
         [HttpGet]
-        [Route("api/getcand/{data}")] //Busca informação de um determinado candidato
+        [Route("api/getcand/{data}")] //busca informaçoes do candidato em questão
         public JsonResult BuscarCandidato(int data)
         {
             try
             {
-                //Busca algum registro no banco que possua a legenda semelhante ao parametro recebido
+                
                 if (_context.Candidatos.ToList().FindAll(p => p.Legenda == data).Count != 0)
                 {
                     var obj = _context.Candidatos.First(p => p.Legenda == data);
-                    return Json(obj); //Caso sim, retorna ele
+                    return Json(obj); 
                 }
                 else
                 {
@@ -196,7 +197,7 @@ namespace UrnaEletronica.Controllers
                         NomeCompleto = "Fulano de Tal",
                         Vice = "Ciclano de Tal"
                     };
-                    return Json(n); //Caso não, envia para o front um objeto de legenda 000 para ser identificado como voto em branco
+                    return Json(n); 
                 }
             }
             catch (Exception e)
@@ -206,7 +207,7 @@ namespace UrnaEletronica.Controllers
         }
 
         [HttpGet]
-        [Route("api/getcands")] // Retorna uma lista com todos os candidatos
+        [Route("api/getcands")] 
         public IActionResult BuscarCandidatos()
         {
             try
@@ -221,7 +222,7 @@ namespace UrnaEletronica.Controllers
         }
 
         [HttpGet]
-        [Route("api/resetwhite")] // Reseta todos os votos em branco
+        [Route("api/resetwhite")] 
         public IActionResult ResetarBrancos()
         {
             try
