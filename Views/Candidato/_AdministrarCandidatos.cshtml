@@ -1,0 +1,37 @@
+﻿@model List<UrnaEletronica.Models.ApiModels.Candidato>;
+@{
+    Layout = "_Layout";
+}
+
+<div class="conteudo titulo">
+<img src="~/logo2.png" width="100" />
+<h3>Administrar Candidatos</h3>
+</div>
+
+<div class="conteudo legenda tabela">
+
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>Vice</td>
+            <td>Legenda</td>
+            <td>Inscrição</td>
+            <td>Editar</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NomeCompleto.Split(" ")[0]</td>
+                <td>@item.Vice.Split(" ")[0]</td>
+                <td>@item.Legenda.ToString()</td>
+                <td>@item.Inscricao.ToShortDateString()</td>
+                <td><a href="@Url.Action("RemoverCandidato","Candidato", new { data = item.Legenda })"><font style="color: red;"><strong>X</strong></font></a></td>
+            </tr>
+         }
+        </table>
+
+</div>
+
+<div class="conteudo rodape">
+    <p><a href="@Url.Action("AdicionarCandidato","Candidato")">Clique aqui</a> para adicionar um novo candidato ou no <font style="color: red;"><strong>X</strong></font> para remover algum.</p>
+</div>

@@ -1,0 +1,24 @@
+﻿@model UrnaEletronica.Models.CandidatoViewModels.CandidatoViewModel;
+@{
+    Layout = "_Layout";
+}
+
+<div class="conteudo titulo">
+    <img src="~/logo2.png" width="100" />
+    <h3>Cadastrar Novo Candidato</h3>
+</div>
+
+<div class="conteudo legenda">
+    <form name="cadastroForm" asp-controller="Candidato" asp-action="AdicionarCandidato" method="post">
+
+        <h5>✅ <input asp-for="NomeCompleto" placeholder="Nome do Candidato" style="font-size: 20px;"></input><br></h5>
+        <h5>📌 <input asp-for="Vice" placeholder="Nome do Vice" style="font-size: 20px;"></input><br></h5>
+        <h5>☑️ <input limit-to="2" asp-for="Legenda" placeholder="Legenda (Número)" style="font-size: 20px;" maxlength="2" /><br> <br></h5>
+        <h5><button type="submit" class="btn btn-primary btn-block btn-lg">Adicionar Candidato</button><br></h5>
+    </form>
+
+</div>
+
+<div class="conteudo rodape">
+    
+</div>

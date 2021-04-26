@@ -1,0 +1,51 @@
+﻿@model List<UrnaEletronica.Models.VotoViewModels.ResultadosViewModel>;
+@{
+    Layout = "_Layout";
+    
+}
+<div class="conteudo titulo">
+    <img src="~/logo2.png" width="100" />
+    <h3>Resultado da Votação</h3>
+</div>
+
+<div class="conteudo legenda tabela votos">
+
+
+    <table class="table">
+        <tr>
+            <td>Candidato</td>
+            <td>Vice</td>
+            <td>Legenda</td>
+            <td>Votos</td>
+        </tr>
+        @{
+            foreach (var item in Model)
+            {
+                var legenda = "";
+                if (item.Legenda.ToString().Length == 1) { legenda = "0" + item.Legenda.ToString(); }
+                else { legenda = item.Legenda.ToString(); }
+
+
+                <tr>
+                    @{
+
+                        if (item.Candidato == "VOTOS EM BRANCO")
+                        {
+                            legenda = "000";
+
+                            <td><a title="Resetar votos em branco" style="text-decoration: none;" href="@Url.Action("ResetarBrancos","Voto")"><font style="color: red;">❌</font></a> @item.Candidato</td>
+                        }
+                        else
+                        {
+                            <td>@item.Candidato</td>
+                        }
+                    }
+                    <td>@item.Vice</td>
+                    <td>@legenda</td>
+                    <td>@item.Votos</td>
+                </tr>
+            }
+        }
+    </table>
+
+</div>

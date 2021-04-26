@@ -1,0 +1,234 @@
+﻿.fundo {
+    background-image: url("https://designwoop.com/uploads/2012/05/pattern_white_x0.5_pattern_vectorized_copy_2x-613x460.png");
+    background-repeat: repeat;
+}
+
+.bandeira {
+    background-color: #dbd5c9;
+    width: 1000px;
+    height: 500px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+}
+
+.tela {
+    background-image: linear-gradient(to right, rgb(206, 206, 206), rgb(235, 235, 235));
+    width: 600px;
+    height: 450px;
+    margin-left: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+    float: left;
+    border-style: dashed;
+}
+
+.painel {
+    background-color: rgb(55, 55, 55);
+    width: 325px;
+    height: 315px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 25px;
+    float: left;
+}
+
+.img-logo {
+    border: 1px solid rgb(169, 169, 169);
+    border-radius: 4px;
+    padding: 5px;
+    width: 325px;
+}
+
+.logo {
+    float: left;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.teclado {
+    margin-top: 15px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.tecla {
+    width: 90px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: rgb(75, 75, 75);
+    margin-left: 4px;
+    margin-top: 5px;
+    float: left;
+    line-height: 40px;
+    color: white;
+    font-weight: 600;
+}
+
+.botoes {
+    position: fixed;
+    bottom: 30px;
+    text-align: center;
+    margin-left: 8px;
+}
+
+.btn-branco {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 5px;
+    float: left;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+.btn-corrige {
+    width: 90px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ee963c;
+    margin-left: 5px;
+    float: left;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+.btn-confirma {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #94dcb6;
+    float: left;
+    margin-left: 5px;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+
+.numero {
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 40px;
+    font-size: 25px;
+}
+
+.pisca {
+    animation-name: pisca;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pisca {
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+}
+
+
+.candidato.nome {
+}
+
+.candidato.vice {
+}
+
+.conteudo.candidato {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.conteudo.titulo {
+    margin-top: 50px;
+    text-align: center;
+    color: rgb(29, 29, 29);
+}
+
+.conteudo.legenda {
+    margin-top: 30px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.conteudo.rodape {
+    margin-top: 50px;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: rgb(112, 112, 112);
+}
+
+.conteudo.etapa1 {
+    margin-top: 10px;
+}
+
+
+.links {
+    background-color: rgb(29, 29, 29);
+    text-align: center;
+    height: 25px;
+}
+
+.link {
+    color: azure;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+    .link:hover {
+        color: rgb(206, 206, 206);
+        text-align: center;
+        text-decoration: none;
+    }
+
+.tabela {
+    margin-left: 20px;
+    height: 120px;
+    width: 560px;
+    overflow-y: scroll;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+.votos {
+    height: 200px;
+}
+
+.zero {
+    margin-left: 98px;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    background-color: rgb(29, 29, 29);
+    bottom: 0;
+    color: white;
+    text-align: center;
+}

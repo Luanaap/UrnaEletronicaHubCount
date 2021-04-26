@@ -1,0 +1,132 @@
+﻿@{ var legenda = 0; }
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        angular.module("app", []);
+        angular.module("app").directive("limitTo", [function () {
+            return {
+                restrict: "A",
+                link: function (scope, elem, attrs) {
+                    var limit = parseInt(attrs.limitTo);
+                    angular.element(elem).on("keypress", function (e) {
+
+                        //Controle de limite e numberOnly
+                        var c = String.fromCharCode(e.which).match("[0-9]");
+                        if (c != null) {
+                            if (this.value.length == limit) {
+                                this.value = c[0];
+                                e.preventDefault();
+                            }
+                            return true;
+                        } else {
+                            e.preventDefault();
+                        }
+
+                    });
+                }
+            }
+        }]);
+        angular.module("app").controller("appCtrl", function ($scope) {
+
+
+            $scope.numClick = function (n) {
+                var audio = new Audio('https://' + location.host + '/audios/numeros.mp3');
+                audio.play();
+                
+                let nVazio = document.querySelector('.numero.pisca');
+                if (nVazio !== null) {
+                    nVazio.innerHTML = n;
+                    nVazio.classList.remove('pisca');
+                    if (nVazio.nextElementSibling !== null) {
+                        nVazio.nextElementSibling.classList.add('pisca');
+                    }
+                }
+            };
+
+            $scope.confirmaClick = function () {
+                //Caso não exista numero vazio
+                let nVazio = document.querySelector('.numero.pisca');
+                if (nVazio == null) {
+
+                    var audio = new Audio('https://' + location.host + '/audios/confirma.mp3');
+                    audio.play();
+
+                    var nums = document.querySelectorAll('.numero');
+                    var legenda = nums[0].textContent + "" + nums[1].textContent;
+
+
+                    setTimeout(function () {
+                        window.location.href = '/Voto/BotaoConfirma?data=' + legenda;
+                    }, 500);
+                }
+
+            };
+
+            $scope.brancoClick = function () {
+                var audio = new Audio('https://' + location.host + '/audios/corrige.mp3');
+                audio.play();
+
+                setTimeout(function () {
+                    window.location.href = '/Voto/BotaoBranco';
+                }, 300);
+
+            };
+
+            $scope.corrigeClick = function () {
+                var audio = new Audio('https://' + location.host + '/audios/corrige.mp3');
+                audio.play();
+
+                setTimeout(function () {
+                    window.location.href = '/Voto/BotaoCorrige';
+                }, 300);
+            };
+
+            $scope.paginaAnterior = function () {             
+                window.history.back();
+            };
+            $scope.maxlength = 2;
+        });
+    </script>
+</head>
+<body ng-app="app" class="fundo">
+    <div class="bg" ng-controller="appCtrl">
+        <div class="tela">@RenderBody()</div>
+        <div class="logo"><img src="~/logo.png" class="img-logo" /></div>
+        <div class="painel">
+
+            <div class="teclado">
+                <button class="tecla" ng-click="numClick(1)">1</button>
+                <button class="tecla" ng-click="numClick(2)">2</button>
+                <button class="tecla" ng-click="numClick(3)">3</button>
+                <button class="tecla" ng-click="numClick(4)">4</button>
+                <button class="tecla" ng-click="numClick(5)">5</button>
+                <button class="tecla" ng-click="numClick(6)">6</button>
+                <button class="tecla" ng-click="numClick(7)">7</button>
+                <button class="tecla" ng-click="numClick(8)">8</button>
+                <button class="tecla" ng-click="numClick(9)">9</button>
+                <button class="tecla zero" ng-click="numClick(0)">0</button>
+            </div>
+
+            <div class="botoes">
+                <button class="btn-branco" ng-click="brancoClick()">BRANCO</button>
+                <button class="btn-corrige" ng-click="corrigeClick()">CORRIGE</button></a>
+                <button class="btn-confirma" ng-click="confirmaClick()">CONFIRMA</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="links">
+        <a class="link" href="@Url.Action("Index","Voto")">Página Inicial</a>
+        <a class="link" href="@Url.Action("AdministrarCandidatos","Candidato")">Administrar Candidatos</a>
+        <a class="link" href="@Url.Action("Resultados","Voto")">Verificar Resultados da Votação</a>
+    </div>
+    <div class="footer">
+        <span>Teste de Luana Andrade </span>
+    </div>
+</body>
+</html>

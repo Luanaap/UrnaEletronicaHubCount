@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = "_Layout";
+    var votoBranco = ((int)ViewBag.Legenda == 000);
+    var css = "";
+    if (!votoBranco) { css = "etapa1"; }
+
+    string txtLegenda = ViewBag.Legenda.ToString();
+    if(txtLegenda.Length == 1) { txtLegenda = "0" + txtLegenda; }
+}
+
+<div class="conteudo titulo">
+    <img src="~/logo2.png" width="100" />
+    <h3>Confirme o seu Voto</h3>
+</div>
+
+@{
+    if (!votoBranco)
+    {
+        <div class="conteudo candidato">
+            <div class="candidato nome">Candidato: <strong>@ViewBag.Nome</strong></div>
+            <div class="candidato vice">Vice: <strong>@ViewBag.Vice</strong></div>
+        </div>
+    }
+}
+
+<div class="conteudo legenda etapa1">
+    @{
+        if (votoBranco) // Maneira para entender se é branco ou não
+        {
+
+            <div class="numero">B</div>
+            <div class="numero">R</div>
+            <div class="numero">A</div>
+            <div class="numero">N</div>
+            <div class="numero">C</div>
+            <div class="numero">O</div>
+        }
+        else
+        {
+            <div class="numero">@txtLegenda.Substring(0, 1)</div>
+            <div class="numero">@txtLegenda.Substring(1)</div>
+        }
+    }
+</div>
+
+    <div class="conteudo rodape @css">
+        <p>Verifique os dados do seu candidato antes de continuar</p>
+        <p>Caso tenha certeza, clique em <font style="color: green;">CONFIRMA</font> para o próximo passo.</p>
+    </div>
